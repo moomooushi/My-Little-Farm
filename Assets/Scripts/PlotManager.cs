@@ -9,17 +9,19 @@ public class PlotManager : MonoBehaviour
     SpriteRenderer plant;
     BoxCollider2D plantCollider;
 
-    public Sprite[] plantStages;
     int plantStage = 0;
-    float timeBtwStages = 2f;
     float timer;
+
+    PlantObject selectedPlant;
+
+    FarmManager fm;
 
     // Start is called before the first frame update
     void Start()
     {
         plant = transform.GetChild(0).GetComponent<SpriteRenderer>();
         plantCollider = transform.GetChild(0).GetComponent<BoxCollider2D>();
-
+        fm = transform.parent.GetComponent<FarmManager>();
     }
 
     // Update is called once per frame
@@ -28,9 +30,9 @@ public class PlotManager : MonoBehaviour
         if (isPlanted)
         {
             timer -= Time.deltaTime;
-            if(timer < 0 && plantStage < plantStages.Length - 1)
+            if(timer < 0 && plantStage < selectedPlant.plantStages.Length - 1)
             {
-                timer = timeBtwStages;
+                timer = selectedPlant.timeBtwStages;
                 plantStage++;
                 UpdatePlant();
             }
@@ -42,14 +44,14 @@ public class PlotManager : MonoBehaviour
         if (isPlanted)
         {
             //We want to harvest if crop is planted
-            if(plantStage == plantStages.Length - 1)
+            if(plantStage == selectedPlant.plantStages.Length - 1)
             {
                 Harvest();
             }
         }
-        else
+        else if(fm.isPlanting)
         {
-            Plant();
+            Plant(fm.selectPlant.plant);
         }
         Debug.Log("Clicked");
     }
@@ -61,19 +63,20 @@ public class PlotManager : MonoBehaviour
         plant.gameObject.SetActive(false);
     }
 
-    void Plant()
+    void Plant(PlantObject newPlant)
     {
+        selectedPlant = newPlant;
         Debug.Log("Planted");
         isPlanted = true;
         plantStage = 0;
         UpdatePlant();
-        timer = timeBtwStages;
+        timer = selectedPlant.timeBtwStages;
         plant.gameObject.SetActive(true);
     }
 
     void UpdatePlant()
     {
-        plant.sprite = plantStages[plantStage];
+        plant.sprite = selectedPlant.plantStages[plantStage];
         plantCollider.size = plant.sprite.bounds.size;
         plantCollider.offset = new Vector2(0, plant.bounds.size.y/2);
     }

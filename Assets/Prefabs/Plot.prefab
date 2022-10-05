@@ -255,11 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cd566bb8c2e1a48a2ad2a0f957ec02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantStages:
-  - {fileID: 711628636, guid: d30be692f6e22dd48a548c44875cfa06, type: 3}
-  - {fileID: 656439992, guid: d30be692f6e22dd48a548c44875cfa06, type: 3}
-  - {fileID: -55590040, guid: d30be692f6e22dd48a548c44875cfa06, type: 3}
-  - {fileID: -1153305733, guid: d30be692f6e22dd48a548c44875cfa06, type: 3}
+  selectedPlant: {fileID: 11400000, guid: 5f5113394f5541a4b8a42b29e88c7206, type: 2}
 --- !u!50 &8038443791133715554
 Rigidbody2D:
   serializedVersion: 4
