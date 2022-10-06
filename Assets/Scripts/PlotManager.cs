@@ -53,7 +53,6 @@ public class PlotManager : MonoBehaviour
         {
             Plant(fm.selectPlant.plant);
         }
-        Debug.Log("Clicked");
     }
 
     void Harvest()
