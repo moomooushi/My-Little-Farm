@@ -11,6 +11,9 @@ public class PlantItem : MonoBehaviour
     public Text priceTxt;
     public Image icon;
 
+    public Image btnImage;
+    public Text btnText;
+
     FarmManager fm;
 
     // Start is called before the first frame update
@@ -29,7 +32,7 @@ public class PlantItem : MonoBehaviour
     void InitializeUI()
     {
         nameTxt.text = plant.plantName;
-        priceTxt.text = "$" + plant.price;
+        priceTxt.text = "$" + plant.buyPrice;
         icon.sprite = plant.icon;
     }
 }
